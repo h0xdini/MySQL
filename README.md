@@ -4,7 +4,7 @@
 
 <br/>
 
-## Basic Creation and Deletion
+## Basic DataBase Creation and Deletion
 
 ### Creation
 
@@ -215,3 +215,26 @@ ALTER TABLE table_name MODIFY field char(255);
 
 <br/>
 
+### Rename table
+
+```sql
+ALTER TABLE table_name RENAME new_name;
+```
+
+<br/>
+
+### Change and Modify together
+
+```sql
+ALTER TABLE table_name MODIFY field VARCAHR(255), CHANGE table_name new_table;
+```
+
+<br/>
+
+### Change the char set
+
+```sql
+ALTER TABLE table_name CONVERT TO CHAR SET utf8; // default charset: latin1
+```
+
+<br/>
