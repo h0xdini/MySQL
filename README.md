@@ -72,6 +72,7 @@ SHOW DATABASES LIKE "db_name";
 ### String Types
 
 | String type | Max Length |
+| --- | --- |
 | Char | 255(must specify) |
 | VarChar | 65.535 |
 | TinyText | |
