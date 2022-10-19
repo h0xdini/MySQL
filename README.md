@@ -350,3 +350,156 @@ Make the field NOT NULL and UNIQUE
 ALTER TABLE table_name ADD field_name VARCHAR(255) NOT NULL UNIQUE;
 ```
 
+<br/>
+
+### PRIMARY KEY
+
+> The PRIMARY KEY constraint uniquely identifies each record in a table.
+
+> Primary keys must contain `UNIQUE` values, and cannot contain `NULL` values.
+
+> A table can have only ONE primary key; and in the table, this primary key can consist of single or multiple columns (fields).
+
+#### SQL PRIMARY KEY on CREATE TABLE
+
+```sql
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    PRIMARY KEY (ID)
+);
+
+Second method--
+
+CREATE TABLE Persons (
+    ID int NOT NULL PRIMARY KEY,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int
+);
+```
+
+To allow naming of a PRIMARY KEY constraint, and for defining a PRIMARY KEY constraint on multiple columns, use the following SQL syntax:
+
+```sql
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    CONSTRAINT PK_Person PRIMARY KEY (ID,LastName)
+);
+```
+
+⚠️ **Note:** In the example above there is only ONE PRIMARY KEY (PK_Person). However, the VALUE of the primary key is made up of TWO COLUMNS (ID + LastName).
+
+#### SQL PRIMARY KEY on ALTER TABLE
+
+```sql
+ALTER TABLE table_name ADD PRIMARY KEY (column_name);
+```
+
+To allow naming of a PRIMARY KEY constraint, and for defining a PRIMARY KEY constraint on multiple columns, use the following SQL syntax:
+
+```sql
+ALTER TABLE table_name ADD CONSTRAINT constraint_name PRIMARY_KEY (field1, field2...);
+```
+
+⚠️ **Note:** If you use `ALTER TABLE` to add a primary key, the primary key column(s) must have been declared to not contain NULL values (when the table was first created).
+
+#### DROP a PRIMARY KEY Constraint
+
+```sql
+ALTER TABLE table_name DROP PRIMARY KEY;
+```
+
+```sql
+ALTER TABLE table_name DROP CONSTRAINT constraint_name;
+```
+
+<br/>
+
+### FOREIGN KEY Constraint
+
+> A `FOREIGN KEY` is a field (or collection of fields) in one table, that refers to the `PRIMARY KEY` in another table.
+
+> The table with the foreign key is called the child table, and the table with the primary key is called the referenced or parent table.
+
+
+#### Persons Table
+
+| personeId | lastName | firstName | age |
+| --- | --- | --- | --- |
+| 1 | Hansen | Ola | 30 |
+| 2 | Svendson | Tove | 23 |
+| 3 | Petterson | Kari | 20 |
+
+#### Orders Table
+
+| orderId | orderNumber | personId |
+| --- | --- | --- |
+| 1 | 77895 | 3 |
+| 2 | 44678 | 3 |
+| 3 | 22456 | 2 |
+| 4 | 24562 | 1 |
+
+> Notice that the "PersonID" column in the "Orders" table points to the "PersonID" column in the "Persons" table.
+
+> The "PersonID" column in the "Persons" table is the PRIMARY KEY in the "Persons" table.
+
+> The "PersonID" column in the "Orders" table is a FOREIGN KEY in the "Orders" table.
+
+⚠️ **Note:** The FOREIGN KEY constraint prevents invalid data from being inserted into the foreign key column, because it has to be one of the values contained in the parent table.
+
+#### SQL FOREIGN KEY on CREATE TABLE
+
+```sql
+CREATE TABLE Orders (
+    OrderID int NOT NULL,
+    OrderNumber int NOT NULL,
+    PersonID int,
+    PRIMARY KEY (OrderID),
+    FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+);
+```
+
+for defining a `FOREIGN KEY` constraint on multiple columns, use the following SQL syntax:
+
+```sql
+CREATE TABLE Orders (
+    OrderID int NOT NULL,
+    OrderNumber int NOT NULL,
+    PersonID int,
+    PRIMARY KEY (OrderID),
+    CONSTRAINT FK_PersonOrder FOREIGN KEY (PersonID)
+    REFERENCES Persons(PersonID)
+);
+```
+
+#### SQL FOREIGN KEY on ALTER TABLE
+
+```sql
+ALTER TABLE table_name ADD FOREIGN KEY (clientId) REFRENCES clients(id)
+ON UPDATE CASCADE 
+ON DELETE CASCADE;
+```
+
+for defining a FOREIGN KEY constraint on multiple columns, use the following SQL syntax:
+
+```sql
+ALTER TABLE table_name
+ADD CONSTRAINT constraint_name
+FOREIGN KEY (other_table_primary_key_in_here) REFRENCES other_table(other_table_primary_key);
+```
+
+#### DROP a FOREIGN KEY constraint
+
+```sql
+ALTER TABLE table_name DROP FOREIGN KEY fk_name;
+```
+
+```sql
+ALTER TABLE table_name DROP CONSTRAINT fk_constraint_name;
+```
