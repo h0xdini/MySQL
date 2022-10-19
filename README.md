@@ -344,3 +344,9 @@ ALTER TABLE Persons
 DROP INDEX field; // we can replace field by a constraint
 ```
 
+Make the field NOT NULL and UNIQUE
+
+```sql
+ALTER TABLE table_name ADD field_name VARCHAR(255) NOT NULL UNIQUE;
+```
+
