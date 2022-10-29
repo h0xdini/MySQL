@@ -506,6 +506,10 @@ ALTER TABLE table_name DROP FOREIGN KEY fk_name;
 ALTER TABLE table_name DROP CONSTRAINT fk_constraint_name;
 ```
 
+<br/>
+
+### Relashionships
+
 #### Foreign Key One To One
 
 > Every parent has one relation to the child (only one parent can refer to this child)
