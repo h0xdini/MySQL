@@ -1,4 +1,4 @@
-# MySQL
+# MySQL Concepts
 
 > SQL is a relational database owned by Oracle, to manage it we can use the command line, phpMyAdmin and Oracle WorkBench.
 
@@ -486,6 +486,8 @@ ON UPDATE CASCADE
 ON DELETE CASCADE;
 ```
 
+> We also have `ON DELETE RESRTRICT` and `ON DELETE NO ACTION` (also for update) so we can't delete the parent element.
+
 for defining a FOREIGN KEY constraint on multiple columns, use the following SQL syntax:
 
 ```sql
@@ -503,3 +505,32 @@ ALTER TABLE table_name DROP FOREIGN KEY fk_name;
 ```sql
 ALTER TABLE table_name DROP CONSTRAINT fk_constraint_name;
 ```
+
+#### Foreign Key One To One
+
+> Every parent has one relation to the child (only one parent can refer to this child)
+
+**Ex:** A person and a visa card number
+
+#### Foreign Key One To Many / Many To One
+
+> A parent can refer to many children
+
+**Ex:**: A user has a bunch of comments.
+
+#### Many To Many
+
+> We look from both sides.
+
+**Ex:** A user can buy many brands, and a brand can be bought by many users.
+
+<br/>
+<br/>
+
+----------------------------------------------------------------------------------
+
+<br/>
+<br/>
+
+# MySQL Manipulation
+
